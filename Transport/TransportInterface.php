@@ -13,7 +13,8 @@ interface TransportInterface
 {
     /**
      * @param $url
-     * @return mixed
+     * @return string
+     * @throws TransportFailureException
      */
     public function get($url);
 }

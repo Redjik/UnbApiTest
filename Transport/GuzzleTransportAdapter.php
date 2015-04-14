@@ -10,19 +10,24 @@ namespace Redjik\Bundle\UnbTestBundle\Transport;
 
 
 use Guzzle\Http\Client;
+use Guzzle\Http\Exception\RequestException;
 
 class GuzzleTransportAdapter implements TransportInterface
 {
-
     /**
      * @param $url
-     * @return mixed
+     * @return string
+     * @throws TransportFailureException
      */
     public function get($url)
     {
         $client = new Client();
         $request = $client->get($url);
-        $response = $request->send();
+        try{
+            $response = $request->send();
+        }catch (RequestException $e){
+            throw new TransportFailureException('GuzzleTransport couldn\'t open the url .'.$url . ' due to '.$e->getMessage(), $e->getCode());
+        }
         return $response->getBody(true);
     }
 }

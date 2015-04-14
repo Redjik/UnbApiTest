@@ -1,0 +1,18 @@
+services:
+  unb_test.transport:
+    class: Redjik\Bundle\UnbTestBundle\Transport\GuzzleTransportAdapter
+
+  unb_test.parser:
+    class: Redjik\Bundle\UnbTestBundle\DataParser\JsonParser
+
+  unb_test.data_collector:
+    class: Redjik\Bundle\UnbTestBundle\Service\DataCollector
+    arguments: ["@unb_test.transport","@unb_test.parser"]
+
+  unb_test.response_factory:
+    class: Redjik\Bundle\UnbTestBundle\ResponseFactory\ResponseFactory
+    arguments: []
+
+  unb_test.action:
+    class: Redjik\Bundle\UnbTestBundle\Action\TestAction
+    arguments: ["@request_stack","@unb_test.data_collector","@unb_test.response_factory"]

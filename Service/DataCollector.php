@@ -18,7 +18,7 @@ class DataCollector
      * Usually we wake custom API realisation this way
      * So for different Application different const Url
      */
-    const URL = 'http://apitester.dev';
+    const URL = 'http://symfony.dev';
 
     /**
      * @var TransportInterface
@@ -41,7 +41,7 @@ class DataCollector
      */
     public function getData($param)
     {
-        $rawData = $this->transport->get($param);
+        $rawData = $this->transport->get($this->getUrl($param));
         return $this->parser->parse($rawData);
     }
 
