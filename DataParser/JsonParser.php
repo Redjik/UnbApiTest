@@ -14,7 +14,6 @@ use Redjik\Bundle\UnbTestBundle\ValueObject\Location;
 
 class JsonParser implements DataParserInterface
 {
-
     /**
      * Receives raw string data
      * Parses it into Data value object
@@ -24,8 +23,10 @@ class JsonParser implements DataParserInterface
      */
     public function parse($rawData)
     {
-        $data = json_encode($rawData);
-        if ($data === false){
+
+        $data = json_decode($rawData,true);
+
+        if (!$data){
             throw new ParseException('Couldn\'t parse due to json error', json_last_error());
         }
 
@@ -40,8 +41,8 @@ class JsonParser implements DataParserInterface
      */
     protected function getData($data)
     {
-        if (isset($data['data']) && isset($data['data']['success'])){
-            return new Data((bool)$data['data']['success'],$this->getLocations($data['data']));
+        if (isset($data['data']) && isset($data['success'])){
+            return new Data((bool)$data['success'],$this->getLocations($data['data']));
         }
 
         return new Data();

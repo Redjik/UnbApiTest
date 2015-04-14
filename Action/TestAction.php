@@ -38,7 +38,20 @@ class TestAction
 
     public function run()
     {
-        $dataObject = $this->collector->getData($this->request->request->get('file','default'));
+        try{
+            $dataObject = $this->collector->getData($this->request->query->get('file','default'));
+        }catch (\Exception $e){
+            $dataObject = $this->getErrorObject($e);
+        }
+        var_dump($dataObject,json_encode($dataObject));exit;
         return $this->responseFactory->getJsonResponse(json_encode($dataObject));
+    }
+
+    protected function getErrorObject(\Exception $e)
+    {
+        $data = new \stdClass();
+        $data->message = $e->getMessage();
+        $data->code = $e->getCode();
+        return array(['data'=>$data]);
     }
 }

@@ -26,7 +26,7 @@ class GuzzleTransportAdapter implements TransportInterface
         try{
             $response = $request->send();
         }catch (RequestException $e){
-            throw new TransportFailureException('GuzzleTransport couldn\'t open the url .'.$url . ' due to '.$e->getMessage(), $e->getCode());
+            throw new TransportFailureException('GuzzleTransport couldn\'t open the url '.$url . ' due to '.$e->getMessage(), $e->getCode());
         }
         return $response->getBody(true);
     }
