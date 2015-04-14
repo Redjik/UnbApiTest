@@ -1,0 +1,22 @@
+{
+    "name": "redjik/unb-apitest-bundle",
+    "type": "symfony-bundle",
+    "description": "Symfony Test Bundle",
+    "license": "GPL",
+    "require": {
+        "php": ">=5.3.29",
+        "guzzle/guzzle": "3.9.*@dev"
+    },
+    "require-dev": {
+        "symfony/dependency-injection": "~2.1",
+        "symfony/http-kernel": "~2.1",
+        "symfony/config": "~2.1",
+        "symfony/yaml": "~2.1"
+    },
+    "suggest": {
+        "psr/log": "For logging purpose"
+    },
+    "autoload": {
+        "psr-4": { "Redjik\\Bundle\\UnbTestBundle\\": "" }
+    }
+}
